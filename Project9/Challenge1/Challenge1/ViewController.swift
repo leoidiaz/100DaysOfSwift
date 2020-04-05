@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Challenge1
 //
-//  Created by Leonardo Diaz on 3/6/20.
+//  Created by Leonardo Diaz on 4/2/20.
 //  Copyright © 2020 Leonardo Diaz. All rights reserved.
 //
 
@@ -20,6 +20,12 @@ class ViewController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareApp))
         
+        // Challenge 1
+        performSelector(inBackground: #selector(loadImages), with: nil)
+        
+    }
+    
+    @objc func loadImages(){
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
         let items = try! fm.contentsOfDirectory(atPath: path)
