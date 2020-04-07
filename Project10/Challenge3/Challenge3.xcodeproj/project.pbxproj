@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		29332F402414762F00B2D6FC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29332F3F2414762F00B2D6FC /* DetailViewController.swift */; };
+		29EC2451243D262600604D01 /* NameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EC2450243D262600604D01 /* NameCell.swift */; };
 		29F11B192412CCD8009EBFB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F11B182412CCD8009EBFB6 /* AppDelegate.swift */; };
 		29F11B1B2412CCD8009EBFB6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F11B1A2412CCD8009EBFB6 /* SceneDelegate.swift */; };
 		29F11B1D2412CCD8009EBFB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F11B1C2412CCD8009EBFB6 /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		29332F3F2414762F00B2D6FC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		29EC2450243D262600604D01 /* NameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameCell.swift; sourceTree = "<group>"; };
 		29F11B152412CCD8009EBFB6 /* Challenge3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Challenge3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F11B182412CCD8009EBFB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29F11B1A2412CCD8009EBFB6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				29F11B182412CCD8009EBFB6 /* AppDelegate.swift */,
 				29F11B1A2412CCD8009EBFB6 /* SceneDelegate.swift */,
 				29F11B1C2412CCD8009EBFB6 /* ViewController.swift */,
+				29EC2450243D262600604D01 /* NameCell.swift */,
 				29332F3F2414762F00B2D6FC /* DetailViewController.swift */,
 				29F11B1E2412CCD8009EBFB6 /* Main.storyboard */,
 				29F11B212412CCD9009EBFB6 /* Assets.xcassets */,
@@ -192,6 +195,7 @@
 				29F11B1D2412CCD8009EBFB6 /* ViewController.swift in Sources */,
 				29F11B192412CCD8009EBFB6 /* AppDelegate.swift in Sources */,
 				29F11B1B2412CCD8009EBFB6 /* SceneDelegate.swift in Sources */,
+				29EC2451243D262600604D01 /* NameCell.swift in Sources */,
 				29332F402414762F00B2D6FC /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

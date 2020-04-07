@@ -39,7 +39,9 @@ class ViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? NameCell else {fatalError("Error trying to dequeue nameCell")}
+        cell.nameLabel.text = pictures[indexPath.item]
+        cell.imageView.image = UIImage(named: pictures[indexPath.item])
         return cell
     }
     
