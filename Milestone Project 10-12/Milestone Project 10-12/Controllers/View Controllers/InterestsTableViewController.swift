@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class InterestsTableViewController: UITableViewController {
     //MARK: - Properties
@@ -122,20 +123,21 @@ extension InterestsTableViewController: UIImagePickerControllerDelegate, UINavig
     // TODO - Combine in an condition statement
     func photosPicker() {
         let picker = UIImagePickerController()
-        picker.allowsEditing = false
+        picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true)
     }
     
     func cameraPicker() {
         let picker = UIImagePickerController()
-        picker.allowsEditing = false
+        picker.sourceType = .camera
+        picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.originalImage] as? UIImage else { return }
+        guard let image = info[.editedImage] as? UIImage else { return }
         
         let imageName = UUID().uuidString
         let imagePath = PhotoController.shared.folderPath().appendingPathComponent(imageName)
