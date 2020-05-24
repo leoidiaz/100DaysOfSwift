@@ -56,15 +56,23 @@
 		29DCFAD2247AF85300C90900 /* Project13 */ = {
 			isa = PBXGroup;
 			children = (
-				29DCFAD3247AF85300C90900 /* AppDelegate.swift */,
-				29DCFAD5247AF85300C90900 /* SceneDelegate.swift */,
 				29DCFAD7247AF85300C90900 /* ViewController.swift */,
 				29DCFAD9247AF85300C90900 /* Main.storyboard */,
+				29DCFAE7247AF89B00C90900 /* Resources */,
+			);
+			path = Project13;
+			sourceTree = "<group>";
+		};
+		29DCFAE7247AF89B00C90900 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				29DCFAD3247AF85300C90900 /* AppDelegate.swift */,
+				29DCFAD5247AF85300C90900 /* SceneDelegate.swift */,
 				29DCFADC247AF85400C90900 /* Assets.xcassets */,
 				29DCFADE247AF85400C90900 /* LaunchScreen.storyboard */,
 				29DCFAE1247AF85400C90900 /* Info.plist */,
 			);
-			path = Project13;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,7 +294,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 74FP7YTMHY;
-				INFOPLIST_FILE = Project13/Info.plist;
+				INFOPLIST_FILE = Project13/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +312,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 74FP7YTMHY;
-				INFOPLIST_FILE = Project13/Info.plist;
+				INFOPLIST_FILE = Project13/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
