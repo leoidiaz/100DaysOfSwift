@@ -13,6 +13,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var intensitySlider: UISlider!
+    @IBOutlet weak var changeFilterButton: UIButton!
+    @IBOutlet weak var radiusSlider: UISlider!
     
     var currentImage: UIImage!
     
@@ -56,19 +58,28 @@ class ViewController: UIViewController {
     func setFilter(action: UIAlertAction){
         guard currentImage != nil else { return }
         guard let actionTitle = action.title else { return }
+        changeFilterButton.setTitle(actionTitle, for: .normal)
+
         currentFilter = CIFilter(name: actionTitle)
-        
+
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
         applyProcessing()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let image = imageView.image else { return }
+        guard let image = imageView.image else {
+            showAlert()
+            return
+        }
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
     @IBAction func intensitySliderChanged(_ sender: Any) {
+        applyProcessing()
+    }
+    
+    @IBAction func radiusSliderChanged(_ sender: Any) {
         applyProcessing()
     }
     
@@ -80,7 +91,7 @@ class ViewController: UIViewController {
         }
         
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(intensitySlider.value * 200, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(radiusSlider.value * 200, forKey: kCIInputRadiusKey)
         }
         
         if inputKeys.contains(kCIInputScaleKey){
@@ -97,6 +108,12 @@ class ViewController: UIViewController {
             let processedImage = UIImage(cgImage: cgImage)
             imageView.image = processedImage
         }
+    }
+    
+    func showAlert(){
+        let alertController = UIAlertController(title: "ERROR", message: "There seems to be no photo to save", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alertController, animated: true)
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer){
