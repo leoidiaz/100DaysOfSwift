@@ -2,7 +2,7 @@
 //  WhackSlot.swift
 //  Project14
 //
-//  Created by Leonardo Diaz on 5/27/20.
+//  Created by Leonardo Diaz on 7/4/20.
 //  Copyright © 2020 Leonardo Diaz. All rights reserved.
 //
 
@@ -36,6 +36,9 @@ class WhackSlot: SKNode {
     
     func show(hideTime: Double){
         if isVisible { return }
+        createMudParticles()
+        charNode.xScale = 1
+        charNode.yScale = 1
         
         charNode.run(SKAction.moveBy(x: 0, y: 80, duration: 0.05))
         isVisible = true
@@ -56,7 +59,32 @@ class WhackSlot: SKNode {
     
     func hide(){
         if !isVisible { return }
+        createMudParticles()
         charNode.run(SKAction.moveBy(x: 0, y: -80, duration: 0.05))
         isVisible = false
+    }
+    
+    func hit(){
+        isHit = true
+        
+        let delay = SKAction.wait(forDuration: 0.25)
+        let hide = SKAction.moveBy(x: 0, y: -80, duration: 0.5)
+        let notVisible = SKAction.run { [weak self] in self?.isVisible = false }
+        let sequence = SKAction.sequence([delay, hide, notVisible])
+        charNode.run(sequence)
+    }
+    
+    func createMudParticles(){
+        if let mudParticles = SKEmitterNode(fileNamed: "mudParticles") {
+            mudParticles.position = CGPoint(x: 0, y: 0)
+            let add = SKAction.run { [weak self] in
+                self?.addChild(mudParticles)
+            }
+            
+            let dismiss = SKAction.run { [weak self] in
+                self?.removeChildren(in: [mudParticles])
+            }
+            run(SKAction.sequence([add, SKAction.wait(forDuration: 0.2), dismiss]))
+        }
     }
 }
