@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		299EBF0F24BE521F00E9BAFA /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299EBF0E24BE521F00E9BAFA /* DetailsViewController.swift */; };
+		299EBF1224BE620900E9BAFA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299EBF1124BE620900E9BAFA /* WebKit.framework */; };
 		29EBFCE124BCFAB60080EEB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBFCE024BCFAB60080EEB9 /* AppDelegate.swift */; };
 		29EBFCE324BCFAB60080EEB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBFCE224BCFAB60080EEB9 /* SceneDelegate.swift */; };
 		29EBFCE524BCFAB60080EEB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EBFCE424BCFAB60080EEB9 /* ViewController.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		299EBF0E24BE521F00E9BAFA /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		299EBF1124BE620900E9BAFA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		29EBFCDD24BCFAB60080EEB9 /* Project16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29EBFCE024BCFAB60080EEB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29EBFCE224BCFAB60080EEB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,17 +37,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				299EBF1224BE620900E9BAFA /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		299EBF1024BE620800E9BAFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				299EBF1124BE620900E9BAFA /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		29EBFCD424BCFAB60080EEB9 = {
 			isa = PBXGroup;
 			children = (
 				29EBFCDF24BCFAB60080EEB9 /* Project16 */,
 				29EBFCDE24BCFAB60080EEB9 /* Products */,
+				299EBF1024BE620800E9BAFA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +75,7 @@
 				29EBFCE024BCFAB60080EEB9 /* AppDelegate.swift */,
 				29EBFCE224BCFAB60080EEB9 /* SceneDelegate.swift */,
 				29EBFCE424BCFAB60080EEB9 /* ViewController.swift */,
+				299EBF0E24BE521F00E9BAFA /* DetailsViewController.swift */,
 				29EBFCE624BCFAB60080EEB9 /* Main.storyboard */,
 				29EBFCE924BCFAB80080EEB9 /* Assets.xcassets */,
 				29EBFCEB24BCFAB80080EEB9 /* LaunchScreen.storyboard */,
@@ -145,6 +160,7 @@
 				29EBFCE124BCFAB60080EEB9 /* AppDelegate.swift in Sources */,
 				29EBFCF524BCFC340080EEB9 /* Capital.swift in Sources */,
 				29EBFCE324BCFAB60080EEB9 /* SceneDelegate.swift in Sources */,
+				299EBF0F24BE521F00E9BAFA /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
