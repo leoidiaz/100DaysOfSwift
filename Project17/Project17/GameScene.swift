@@ -17,6 +17,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var possibleEnemies = ["ball", "hammer", "tv"]
     var gameTimer: Timer?
     var isGameOver = false
+    // Challenge 2
+    var counter = 0
+    var timer = 1.0
     
     var score = 0 {
         didSet{
@@ -49,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: timer, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
     
     @objc func createEnemy(){
@@ -57,7 +60,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sprite = SKSpriteNode(imageNamed: enemy)
         sprite.position = CGPoint(x: 1200, y: Int.random(in: 50...736))
         addChild(sprite)
+        // Challenge 2
+        counter += 1
         
+        if counter == 20 {
+            counter = 0
+            
+            if timer > 0.1 {
+                timer -= 0.1
+            }
+            
+            gameTimer?.invalidate()
+            gameTimer = Timer.scheduledTimer(timeInterval: timer, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        }
         sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
         sprite.physicsBody?.categoryBitMask = 1
         sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
@@ -92,14 +107,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         player.position = location
     }
+    // Challenge 1
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !isGameOver {
+           endGame()
+        }
+    }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        endGame()
+    }
+    
+    func endGame(){
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = player.position
         addChild(explosion)
-        
         player.removeFromParent()
         isGameOver = true
+        // Challenge 3
+        gameTimer?.invalidate()
+        return
     }
-    
 }
