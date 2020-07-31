@@ -53,6 +53,25 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
     }
+    // Challenge 2
+    func scheduleLater(){
+        registerCategories()
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        
+        let content = UNMutableNotificationContent()
+        
+        content.title = "Late wake up call"
+        content.body = "The early bird catches the worm, but the second mouse gets the mouse."
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData" : "fizzbuzz"]
+        content.sound = .default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+    }
     
     
     func registerCategories(){
@@ -60,7 +79,9 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         center.delegate = self
         
         let show = UNNotificationAction(identifier: "show", title: "Tell me more...", options: .foreground)
-        let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [])
+        let joke = UNNotificationAction(identifier: "joke", title: "what's up with airplane food?", options: .foreground)
+        let remindLater = UNNotificationAction(identifier: "later", title: "Remind me later", options: .foreground)
+        let category = UNNotificationCategory(identifier: "alarm", actions: [remindLater, show, joke], intentIdentifiers: [])
         
         center.setNotificationCategories([category])
     }
@@ -74,12 +95,25 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
                 print("Default identifier")
+                //Challenge 2
+            case "later":
+                scheduleLater()
+                showAlert(title: "Snoozed", message: "Reminder has been snoozed for 24 hours")
             case "show":
-                print("Show more information...")
+                showAlert(title: "Show More", message: customData)
+                // Challenge 1
+            case "joke":
+                showAlert(title: "Joke", message: "✈️")
             default:
                 break
             }
         }
         completionHandler()
+    }
+    
+    func showAlert(title: String, message: String?){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        present(alertController, animated: true)
     }
 }
