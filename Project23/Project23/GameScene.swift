@@ -19,7 +19,8 @@ enum SequenceType: CaseIterable {
 
 class GameScene: SKScene {
     var gameScore: SKLabelNode!
-    
+    // Challenge 3
+    var gameOverLabel: SKLabelNode!
     var score = 0 {
         didSet{
             gameScore.text = "Score: \(score)"
@@ -44,6 +45,30 @@ class GameScene: SKScene {
     var nextSequenceQueued = true
     var isGameEnded = false
     
+    // Challenge 1
+    let penguin = 1
+    let bomb = 0
+    let fastPenguin = 6
+    
+    let enemyXPositionRange = 64...960
+    let enemyYPosition = -128
+    let enemyAngularVelocityRange: ClosedRange<CGFloat> = -3...3
+    let enemyVelocityYRange = 24...32
+
+    let leftScreen:CGFloat = 256
+    let middleScreen: CGFloat = 512
+    let rightScreen: CGFloat = 768
+    
+    let smallerVelocityRange = 3...5
+    let defaultVelocityRange = 8...15
+    
+    let enemyVelocityMultiplier = 40
+    let fastEnemyMultiplier = 45...50
+    
+    let enemyBodyRadius:CGFloat = 64
+    
+    
+    
     override func didMove(to view: SKView) {
         
         let background = SKSpriteNode(imageNamed: "sliceBackground")
@@ -67,7 +92,13 @@ class GameScene: SKScene {
                 sequence.append(nextSequence)
             }
         }
-        print(sequence.count)
+        // Challenge 3
+        gameOverLabel = SKLabelNode(fontNamed: "Chalkduster")
+        gameOverLabel.text = "Game Over"
+        gameOverLabel.fontSize = 80
+        gameOverLabel.position = CGPoint(x: 512, y: 384)
+        gameOverLabel.zPosition = 5
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             self?.tossEnemies()
         }
@@ -140,11 +171,16 @@ class GameScene: SKScene {
         let nodesAtPoint = nodes(at: location)
         
         for case let node as SKSpriteNode in nodesAtPoint {
-            if node.name == "enemy" {
+            if node.name == "enemy" || node.name == "fastEnemy" {
                 // destory penguin
                 if let emitter = SKEmitterNode(fileNamed: "sliceHitEnemy"){
                     emitter.position = node.position
                     addChild(emitter)
+                }
+                if node.name == "fastEnemy" {
+                    score += 3
+                } else {
+                    score += 1
                 }
                 
                 node.name = ""
@@ -156,8 +192,7 @@ class GameScene: SKScene {
                 
                 let seq = SKAction.sequence([group, .removeFromParent()])
                 node.run(seq)
-                
-                score += 1
+
                 
                 if let index = activeEnemies.firstIndex(of: node) {
                     activeEnemies.remove(at: index)
@@ -193,6 +228,8 @@ class GameScene: SKScene {
     }
     
     func endGame(triggeredByBomb: Bool){
+        // Challenge 3
+        addChild(gameOverLabel)
         guard isGameEnded == false else { return }
         
         isGameEnded = true
@@ -232,11 +269,9 @@ class GameScene: SKScene {
             activeSliceFG.path = nil
             return
         }
-        
         if activeSlicePoints.count > 12 {
             activeSlicePoints.removeFirst(activeSlicePoints.count - 12)
         }
-        
         let path = UIBezierPath()
         path.move(to: activeSlicePoints[0])
         
@@ -255,12 +290,12 @@ class GameScene: SKScene {
         var enemyType = Int.random(in: 0...6)
         
         if forceBomb == .never {
-            enemyType = 1
+            enemyType = penguin
         } else if forceBomb == .always {
-            enemyType = 0
+            enemyType = bomb
         }
         
-        if enemyType == 0 {
+        if enemyType == bomb {
             enemy = SKSpriteNode()
             enemy.zPosition = 1
             enemy.name = "bombContainer"
@@ -289,29 +324,42 @@ class GameScene: SKScene {
         } else {
             enemy = SKSpriteNode(imageNamed: "penguin")
             run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
-            enemy.name = "enemy"
+            if enemyType == fastPenguin {
+                enemy.name = "fastEnemy"
+            } else {
+                enemy.name = "enemy"
+            }
         }
-        
-        let randomPosition = CGPoint(x: Int.random(in: 64...940), y: -128)
+        // Challenge 1
+        let randomPosition = CGPoint(x: Int.random(in: enemyXPositionRange), y: enemyYPosition)
         enemy.position = randomPosition
         
-        let randomAngularVelocity = CGFloat.random(in: -3...3)
+        let randomAngularVelocity = CGFloat.random(in: enemyAngularVelocityRange)
         let randomXVelocity: Int
         
-        if randomPosition.x < 256 {
-            randomXVelocity = Int.random(in: 8...15)
-        } else if randomPosition.x < 512 {
-            randomXVelocity = Int.random(in: 3...5)
-        } else if randomPosition.x < 768 {
-            randomXVelocity = -Int.random(in: 3...5)
+        if randomPosition.x < leftScreen {
+            randomXVelocity = Int.random(in: defaultVelocityRange)
+        } else if randomPosition.x < middleScreen {
+            randomXVelocity = Int.random(in: smallerVelocityRange)
+        } else if randomPosition.x < rightScreen {
+            randomXVelocity = -Int.random(in: smallerVelocityRange)
         } else {
-            randomXVelocity = -Int.random(in: 8...15)
+            randomXVelocity = -Int.random(in: defaultVelocityRange)
         }
         
-        let randomYVelocity = Int.random(in: 24...32)
+        let randomYVelocity = Int.random(in: enemyVelocityYRange)
          
-        enemy.physicsBody = SKPhysicsBody(circleOfRadius: 64)
-        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * 40, dy: randomYVelocity * 40)
+        
+        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemyBodyRadius)
+        // Challenge 2
+        var enemySpeed: Int
+
+        if enemyType == fastPenguin {
+            enemySpeed = Int.random(in:fastEnemyMultiplier)
+        } else {
+            enemySpeed = enemyVelocityMultiplier
+        }
+        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * enemySpeed, dy: randomYVelocity * enemySpeed)
         enemy.physicsBody?.angularVelocity = randomAngularVelocity
         enemy.physicsBody?.collisionBitMask = 0
         
