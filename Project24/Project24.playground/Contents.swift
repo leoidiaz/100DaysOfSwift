@@ -84,14 +84,62 @@ import UIKit
 //]
 //let attributedString = NSAttributedString(string: string, attributes: attributes)
 
-let string = "This is a test string"
-let attributedString = NSMutableAttributedString(string: string)
+//let string = "This is a test string"
+//let attributedString = NSMutableAttributedString(string: string)
+//
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 8), range: NSRange(location: 0, length: 4))
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 5, length: 2))
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 8, length: 1))
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 32), range: NSRange(location: 10, length: 4))
+//attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: NSRange(location: 15, length: 6))
 
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 8), range: NSRange(location: 0, length: 4))
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 5, length: 2))
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 8, length: 1))
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 32), range: NSRange(location: 10, length: 4))
-attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: NSRange(location: 15, length: 6))
 
 
+//MARK: - Challenges
 
+// Challenge 1
+var pet = "pet"
+var carpet = "carpet"
+
+pet.withPrefix("car")
+carpet.withPrefix("car")
+
+extension String {
+    func withPrefix(_ word: String) -> String {
+        guard !self.hasPrefix(word) else { return self }
+        return word + self
+    }
+}
+
+// Challenge 2
+extension String {
+    func isNumeric() -> Bool {
+        for i in self {
+            guard Double(String(i)) == nil else { return true }
+        }
+        return false
+    }
+}
+
+var testString = "tehisshsfu"
+var testString2 = "gnskdfghjh2gvdsf"
+testString.isNumeric()
+testString2.isNumeric()
+
+// Challenge 3
+extension String {
+    var lines: [String] {
+        return self.components(separatedBy: "\n")
+    }
+}
+
+let seperated = "this\nis\na\ntest"
+let seperated2 = """
+this
+is
+a
+test
+"""
+
+seperated.lines
+seperated2.lines
