@@ -114,6 +114,9 @@ extension String {
 // Challenge 2
 extension String {
     func isNumeric() -> Bool {
+        // Check whole if the whole string has numbers
+//        return Double(self) != nil
+        // Check every char in string for a number
         for i in self {
             guard Double(String(i)) == nil else { return true }
         }
@@ -123,8 +126,10 @@ extension String {
 
 var testString = "tehisshsfu"
 var testString2 = "gnskdfghjh2gvdsf"
+var testString3 = "1234"
 testString.isNumeric()
 testString2.isNumeric()
+testString3.isNumeric()
 
 // Challenge 3
 extension String {
