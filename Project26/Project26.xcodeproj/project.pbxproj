@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		297FF46824EF33B2000170D4 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 297FF46724EF33B2000170D4 /* level2.txt */; };
 		2994418124EC6B30003D6F89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2994418024EC6B30003D6F89 /* AppDelegate.swift */; };
 		2994418324EC6B30003D6F89 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2994418224EC6B30003D6F89 /* GameScene.sks */; };
 		2994418724EC6B30003D6F89 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2994418624EC6B30003D6F89 /* GameScene.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		297FF46724EF33B2000170D4 /* level2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 		2994417D24EC6B30003D6F89 /* Project26.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project26.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2994418024EC6B30003D6F89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2994418224EC6B30003D6F89 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				2994418F24EC6B32003D6F89 /* LaunchScreen.storyboard */,
 				2994419224EC6B32003D6F89 /* Info.plist */,
 				2994419824EC6BC4003D6F89 /* level1.txt */,
+				297FF46724EF33B2000170D4 /* level2.txt */,
 			);
 			path = Project26;
 			sourceTree = "<group>";
@@ -133,6 +136,7 @@
 			files = (
 				2994419924EC6BC4003D6F89 /* level1.txt in Resources */,
 				2994418C24EC6B30003D6F89 /* Main.storyboard in Resources */,
+				297FF46824EF33B2000170D4 /* level2.txt in Resources */,
 				2994418324EC6B30003D6F89 /* GameScene.sks in Resources */,
 				2994418E24EC6B32003D6F89 /* Assets.xcassets in Resources */,
 				2994419124EC6B32003D6F89 /* LaunchScreen.storyboard in Resources */,
