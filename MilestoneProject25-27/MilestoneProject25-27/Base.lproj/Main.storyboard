@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VGb-d9-bbN">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MilestoneProject25_27" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D57-2u-fRK">
+                                <rect key="frame" x="12.666666666666657" y="128" width="350" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="8P1-aI-q3E"/>
+                                    <constraint firstAttribute="width" secondItem="D57-2u-fRK" secondAttribute="height" multiplier="1:1" id="gsx-Vi-mSJ"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3P-FJ-LO0">
+                                <rect key="frame" x="12.666666666666657" y="128" width="350" height="350"/>
+                                <state key="normal" image="plus.app.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="photoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qVl-RG-MgR"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aZj-GV-NFY">
+                                <rect key="frame" x="37.666666666666657" y="599" width="300" height="101"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqh-dE-0hh">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="40.666666666666664"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="TOP TEXT">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="topTextTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6cb-Y3-476"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yvG-gr-SiL">
+                                        <rect key="frame" x="0.0" y="60.666666666666629" width="300" height="40.333333333333343"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="BOTTOM TEXT">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="bottomTextTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mSA-kv-SEO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="aZj-GV-NFY" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="0C2-V2-qT6"/>
+                            <constraint firstItem="G3P-FJ-LO0" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3Av-Wq-BBT"/>
+                            <constraint firstItem="aZj-GV-NFY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="99Z-Nm-cjb"/>
+                            <constraint firstItem="G3P-FJ-LO0" firstAttribute="height" secondItem="D57-2u-fRK" secondAttribute="height" id="9mx-ce-rAo"/>
+                            <constraint firstItem="aZj-GV-NFY" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.5" id="Ggj-ea-zTZ"/>
+                            <constraint firstItem="Vqh-dE-0hh" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.05" id="Kus-nB-v7t"/>
+                            <constraint firstItem="D57-2u-fRK" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.7" id="L10-Vm-a0d"/>
+                            <constraint firstItem="G3P-FJ-LO0" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.7" id="Pi6-HS-dCy"/>
+                            <constraint firstItem="G3P-FJ-LO0" firstAttribute="width" secondItem="D57-2u-fRK" secondAttribute="width" id="c35-p2-Mf3"/>
+                            <constraint firstItem="D57-2u-fRK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="x3o-5F-o2G"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZND-c9-pcI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="phc-0e-rjs">
+                            <connections>
+                                <action selector="sharePhoto:" destination="BYZ-38-t0r" id="A82-Mx-wNM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addPhotoButton" destination="G3P-FJ-LO0" id="nMR-vh-vKp"/>
+                        <outlet property="bottomTextButton" destination="yvG-gr-SiL" id="zYJ-bU-R56"/>
+                        <outlet property="memeImage" destination="D57-2u-fRK" id="Ejn-uF-DZc"/>
+                        <outlet property="topTextButton" destination="Vqh-dE-0hh" id="ZHL-io-ExH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="138.61607142857142"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Pxk-9C-qNc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VGb-d9-bbN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zwR-NI-ryo">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wfN-pm-odC">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="i8x-zZ-gHk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eHF-fX-fBA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="138.61607142857142"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+    </resources>
+</document>
