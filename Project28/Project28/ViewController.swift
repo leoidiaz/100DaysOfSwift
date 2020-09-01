@@ -19,8 +19,49 @@ class ViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboad), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboad), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "🔑", style: .plain, target: self, action: #selector(setPassword))
     }
     
+    // Challenge 1
+    @objc func doneButtonTapped(){
+        saveSecretMessage()
+        navigationItem.rightBarButtonItem = nil
+    }
+    // Challenge 2
+    @objc func setPassword(){
+        let alertController = UIAlertController(title: "Set a password", message: nil, preferredStyle: .alert)
+        if KeychainWrapper.standard.string(forKey: "passwordKey") == nil{
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Set a new password"
+            }
+        } else {
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Current password"
+            }
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Set a new password"
+            }
+        }
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Set Password", style: .default, handler: { [weak self] (_) in
+            guard let text = alertController.textFields?.first?.text, !text.isEmpty else { self?.showAlert(title: "Oof", message: "Textfield cannot be empty"); return }
+            guard let secondText = alertController.textFields?.last?.text, !secondText.isEmpty else { self?.showAlert(title: "Oof", message: "Textfield cannot be empty"); return }
+            
+            if KeychainWrapper.standard.string(forKey: "passwordKey") == nil {
+                KeychainWrapper.standard.set(text, forKey: "passwordKey")
+                self?.showAlert(title: "New password set", message: "Hope you wrote it down.")
+            } else {
+                if text == secondText {
+                    KeychainWrapper.standard.set(secondText, forKey: "passwordKey")
+                    self?.showAlert(title: "Password reset", message: "Hope you wrote it down.")
+                } else {
+                    self?.showAlert(title: "Oof", message: "Passwords do not match")
+                }
+            }
+        }))
+        present(alertController, animated: true)
+    }
     
     @objc func adjustForKeyboad(notification: Notification){
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -52,16 +93,20 @@ class ViewController: UIViewController {
                     if success {
                         self?.unlockSecretMessage()
                     } else {
-                        let alertController = UIAlertController(title: "Authentication", message: "You could not be verified; please try again.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "Ok", style: .default))
-                        self?.present(alertController, animated: true)
+                        if KeychainWrapper.standard.string(forKey: "passwordKey") != nil {
+                            self?.showPasswordUnlock()
+                        } else {
+                            self?.showAlert(title: "Authentication", message: "You could not be verified; please try again or set a password.")
+                        }
                     }
                 }
             }
         } else {
-            let alertController = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authenication.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: .default))
-            present(alertController, animated: true)
+            if KeychainWrapper.standard.string(forKey: "passwordKey") != nil {
+                showPasswordUnlock()
+            } else {
+                showAlert(title: "Biometry unavailable", message: "Your device is not configured for biometric authenication.")
+            }
         }
     }
     
@@ -70,8 +115,10 @@ class ViewController: UIViewController {
         title = "Secret Stuff!"
         
         secretTextView.text = KeychainWrapper.standard.string(forKey: "SecretMessage") ?? ""
+        // Challenge 1
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
     }
-    
+    // Challenge 2
     @objc func saveSecretMessage(){
         guard secretTextView.isHidden == false else { return }
         KeychainWrapper.standard.set(secretTextView.text, forKey: "SecretMessage")
@@ -80,4 +127,30 @@ class ViewController: UIViewController {
         title = "Nothing to see here"
     }
 }
-
+    //MARK: - Alert Controller Extensions
+extension ViewController {
+    func showAlert(title: String, message: String?){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        present(alertController, animated: true)
+    }
+    
+    func showPasswordUnlock(){
+        let alertController = UIAlertController(title: "Type in password", message: nil, preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Current Password"
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { [weak self](_) in
+            guard let text = alertController.textFields?.first?.text, !text.isEmpty else { self?.showAlert(title: "Oof", message: "Textfield cannot be empty"); return }
+            DispatchQueue.main.async {
+                if text == KeychainWrapper.standard.string(forKey: "passwordKey") {
+                    self?.unlockSecretMessage()
+                } else {
+                    self?.showAlert(title: "Oof", message: "Password does not match")
+                }
+            }
+        }))
+        present(alertController, animated: true)
+    }
+}
