@@ -15,6 +15,8 @@
 		2926F5C6250161C9006E13F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2926F5C5250161C9006E13F7 /* Assets.xcassets */; };
 		2926F5C9250161C9006E13F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2926F5C7250161C9006E13F7 /* LaunchScreen.storyboard */; };
 		2926F5D125016507006E13F7 /* BuildingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926F5D025016507006E13F7 /* BuildingNode.swift */; };
+		294AF93F25059BB100E70469 /* hitBuilding.sks in Resources */ = {isa = PBXBuildFile; fileRef = 294AF93D25059BB100E70469 /* hitBuilding.sks */; };
+		294AF94025059BB100E70469 /* hitPlayer.sks in Resources */ = {isa = PBXBuildFile; fileRef = 294AF93E25059BB100E70469 /* hitPlayer.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		2926F5C8250161C9006E13F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2926F5CA250161C9006E13F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2926F5D025016507006E13F7 /* BuildingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingNode.swift; sourceTree = "<group>"; };
+		294AF93D25059BB100E70469 /* hitBuilding.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitBuilding.sks; sourceTree = "<group>"; };
+		294AF93E25059BB100E70469 /* hitPlayer.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitPlayer.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				2926F5C5250161C9006E13F7 /* Assets.xcassets */,
 				2926F5C7250161C9006E13F7 /* LaunchScreen.storyboard */,
 				2926F5CA250161C9006E13F7 /* Info.plist */,
+				294AF93D25059BB100E70469 /* hitBuilding.sks */,
+				294AF93E25059BB100E70469 /* hitPlayer.sks */,
 			);
 			path = Project29;
 			sourceTree = "<group>";
@@ -132,6 +138,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2926F5C4250161C7006E13F7 /* Main.storyboard in Resources */,
+				294AF93F25059BB100E70469 /* hitBuilding.sks in Resources */,
+				294AF94025059BB100E70469 /* hitPlayer.sks in Resources */,
 				2926F5BB250161C7006E13F7 /* GameScene.sks in Resources */,
 				2926F5C6250161C9006E13F7 /* Assets.xcassets in Resources */,
 				2926F5C9250161C9006E13F7 /* LaunchScreen.storyboard in Resources */,
@@ -294,6 +302,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Project29/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,6 +320,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Project29/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
