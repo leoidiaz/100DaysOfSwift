@@ -21,8 +21,31 @@ class GameViewController: UIViewController {
     @IBOutlet weak var launchButton: UIButton!
     
     
+    // Challenge 1
+    @IBOutlet weak var player1ScoreLabel: UILabel!
+    @IBOutlet weak var player2ScoreLabel: UILabel!
+    @IBOutlet weak var gameOverLabel: UILabel!
+    @IBOutlet weak var newGameButton: UIButton!
+    
+    var player1Score = 0 {
+        didSet {
+            player1ScoreLabel.text = "Score: \(player1Score)"
+        }
+    }
+    
+    var player2Score = 0 {
+        didSet {
+            player2ScoreLabel.text = "Score: \(player2Score)"
+        }
+    }
+    
+    var isGameOver = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        player1Score = 0
+        player2Score = 0
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
@@ -97,4 +120,41 @@ class GameViewController: UIViewController {
         
         launchButton.isHidden = false
     }
+    
+    func updateScore(player: Int) {
+        if player == 1 {
+            player1Score += 1
+        } else {
+            player2Score += 1
+        }
+        
+        if player1Score == 3 {
+            player1ScoreLabel.text = "WINNER"
+            toggleGame(bool: true)
+        } else if player2Score == 3{
+            player2ScoreLabel.text = "WiNNER"
+            toggleGame(bool: true)
+        }
+    }
+    
+    @IBAction func newGameTapped(_ sender: Any) {
+        toggleGame(bool: false)
+        player1Score = 0
+        player2Score = 0
+        currentGame?.setupNewGame()
+    }
+    
+    func toggleGame(bool: Bool) {
+        isGameOver = bool
+        angleLabel.isHidden = bool
+        angleSlider.isHidden = bool
+        velocitySlider.isHidden = bool
+        velocityLabel.isHidden = bool
+        playerNumber.isHidden = bool
+        launchButton.isHidden = bool
+        gameOverLabel.isHidden = !bool
+        newGameButton.isHidden = !bool
+    }
+    
 }
+

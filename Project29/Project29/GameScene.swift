@@ -22,13 +22,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player2: SKSpriteNode!
     var banana: SKSpriteNode!
     
+    var windLabel: SKLabelNode!
+    
     var currentPlayer = 1
     
+    var currentWind: CGFloat = 0
     
     override func didMove(to view: SKView) {
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         createBuildings()
         createPlayers()
+        changeWind()
         physicsWorld.contactDelegate = self
     }
     
@@ -161,17 +165,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
         banana.removeFromParent()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let newGame = GameScene(size: self.size)
-            newGame.viewController = self.viewController
-            self.viewController?.currentGame = newGame
-            
-            self.changePlayer()
-            newGame.currentPlayer = self.currentPlayer
-            
-            let transition = SKTransition.doorway(withDuration: 1.5)
-            self.view?.presentScene(newGame, transition: transition)
+        if player != player1 {
+            viewController?.updateScore(player: 1)
+        } else {
+            viewController?.updateScore(player: 2)
         }
+        
+        if viewController?.isGameOver == false{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.setupNewGame()
+            }
+        } else {
+            windLabel.isHidden = true
+        }
+    }
+    
+    func setupNewGame(){
+        let newGame = GameScene(size: self.size)
+        newGame.viewController = self.viewController
+        viewController?.currentGame = newGame
+        
+        changePlayer()
+        newGame.currentPlayer = self.currentPlayer
+        windLabel.isHidden = false
+        changeWind()
+        let transition = SKTransition.doorway(withDuration: 1.5)
+        view?.presentScene(newGame, transition: transition)
     }
     
     func bananaHit(building: SKNode, atPoint contactPoint: CGPoint) {
@@ -208,6 +227,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             banana.removeFromParent()
             banana = nil
             changePlayer()
+        }
+    }
+    // Challenge 3
+    func changeWind(){
+        currentWind = CGFloat.random(in: -1...1)
+        physicsWorld.gravity = CGVector(dx: currentWind, dy: physicsWorld.gravity.dy)
+
+        let windSpeed = Int(abs(currentWind) * 10)
+        windLabel = SKLabelNode(fontNamed: "Helvetica")
+        windLabel.fontSize = 17
+        windLabel.position = CGPoint(x: 505, y: 655)
+        addChild(windLabel)
+        
+        if currentWind < 0 {
+            windLabel.text = "Wind <<- (\(windSpeed))"
+//            Wind West
+        } else if currentWind > 0 {
+            windLabel.text = "Wind ->> (\(windSpeed))"
+//            Wind East
+        } else {
+            windLabel.text = "Wind (\(windSpeed))"
+//            "Wind Calm"
         }
     }
 }
