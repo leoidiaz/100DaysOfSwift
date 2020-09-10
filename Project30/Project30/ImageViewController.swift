@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageViewController: UIViewController {
-	var owner: SelectionViewController!
+	weak var owner: SelectionViewController!
 	var image: String!
 	var animTimer: Timer!
 
@@ -35,7 +35,7 @@ class ImageViewController: UIViewController {
 		imageView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
 		// schedule an animation that does something vaguely interesting
-		animTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+		animTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) {  timer in
 			// do something exciting with our image
 			self.imageView.transform = CGAffineTransform.identity
 
@@ -49,7 +49,9 @@ class ImageViewController: UIViewController {
         super.viewDidLoad()
 
 		title = image.replacingOccurrences(of: "-Large.jpg", with: "")
-		let original = UIImage(named: image)!
+        // Challenge 1
+        guard let path = Bundle.main.path(forResource: image, ofType: nil) else { fatalError("Could not load image")}
+        guard let original = UIImage(contentsOfFile: path) else { fatalError("Could not load original from path")}
 
 		let renderer = UIGraphicsImageRenderer(size: original.size)
 
@@ -72,6 +74,11 @@ class ImageViewController: UIViewController {
 			self.imageView.alpha = 1
 		}
 	}
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        animTimer.invalidate()
+    }
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		let defaults = UserDefaults.standard

@@ -10,9 +10,12 @@ import UIKit
 
 class SelectionViewController: UITableViewController {
 	var items = [String]() // this is the array that will store the filenames to load
-	var viewControllers = [UIViewController]() // create a cache of the detail view controllers for faster loading
 	var dirty = false
 
+    var savedImages = [UIImage]()
+    
+    let renderRect = CGRect(origin: .zero, size: CGSize(width: 90, height: 90))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,16 +24,8 @@ class SelectionViewController: UITableViewController {
 		tableView.rowHeight = 90
 		tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-		// load all the JPEGs into our array
-		let fm = FileManager.default
-
-		if let tempItems = try? fm.contentsOfDirectory(atPath: Bundle.main.resourcePath!) {
-			for item in tempItems {
-				if item.range(of: "Large") != nil {
-					items.append(item)
-				}
-			}
-		}
+		
+        fetchImages()
     }
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -58,25 +53,9 @@ class SelectionViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 		// find the image for this cell, and load its thumbnail
-		let currentImage = items[indexPath.row % items.count]
-		let imageRootName = currentImage.replacingOccurrences(of: "Large", with: "Thumb")
-		let path = Bundle.main.path(forResource: imageRootName, ofType: nil)!
-		let original = UIImage(contentsOfFile: path)!
-
-        let renderRect = CGRect(origin: .zero, size: CGSize(width: 90, height: 90))
-        let renderer = UIGraphicsImageRenderer(size: renderRect.size)
-        
-		let rounded = renderer.image { ctx in
-//            ctx.cgContext.setShadow(offset: .zero, blur: 200, color: UIColor.black.cgColor)
-//            ctx.cgContext.fillEllipse(in: CGRect(origin: .zero, size: original.size))
-//            ctx.cgContext.setShadow(offset: .zero, blur: 0, color: nil)
-			ctx.cgContext.addEllipse(in: renderRect)
-			ctx.cgContext.clip()
-
-			original.draw(in: renderRect)
-		}
-
-		cell.imageView?.image = rounded
+		let currentImageIndex = indexPath.row % items.count
+        //Challenge 1
+        cell.imageView?.image = savedImages[currentImageIndex]
 
 		// give the images a nice shadow to make them look a bit more dramatic
 		cell.imageView?.layer.shadowColor = UIColor.black.cgColor
@@ -87,7 +66,7 @@ class SelectionViewController: UITableViewController {
         
 		// each image stores how often it's been tapped
 		let defaults = UserDefaults.standard
-		cell.textLabel?.text = "\(defaults.integer(forKey: currentImage))"
+		cell.textLabel?.text = "\(defaults.integer(forKey: items[currentImageIndex]))"
 
 		return cell
     }
@@ -99,9 +78,64 @@ class SelectionViewController: UITableViewController {
 
 		// mark us as not needing a counter reload when we return
 		dirty = false
-
-		// add to our view controller cache and show
-		viewControllers.append(vc)
-		navigationController!.pushViewController(vc, animated: true)
+        // Challenge 1
+		navigationController?.pushViewController(vc, animated: true)
 	}
+    
+    // Challenge 3
+    func fetchImages(){
+        // load all the JPEGs into our array
+        let fm = FileManager.default
+        
+        guard let resourcePath = Bundle.main.resourcePath else {fatalError("Could not load path")}
+        
+        if let tempItems = try? fm.contentsOfDirectory(atPath: resourcePath) {
+            for item in tempItems {
+                if item.range(of: "Large") != nil {
+                    items.append(item)
+                    if let cachedImage = genterateImage(imageNamed: item) {
+                        savedImages.append(cachedImage)
+                    } else {
+                        guard let newImage = genterateImage(imageNamed: item) else { return }
+                        savedImages.append(newImage)
+                    }
+                }
+            }
+        }
+    }
+    
+    func checkCache(imageNamed: String) -> UIImage? {
+        let path = getDocumentsDirectory().appendingPathComponent(imageNamed)
+        return UIImage(contentsOfFile: path.path)
+    }
+    
+    func genterateImage(imageNamed: String) -> UIImage? {
+        let imageRootName = imageNamed.replacingOccurrences(of: "Large", with: "Thumb")
+        
+        guard let path = Bundle.main.path(forResource: imageRootName, ofType: nil) else { return nil}
+        guard let original = UIImage(contentsOfFile: path) else { return nil }
+        let renderer = UIGraphicsImageRenderer(size: renderRect.size)
+        
+        let rounded = renderer.image { ctx in
+            ctx.cgContext.addEllipse(in: renderRect)
+            ctx.cgContext.clip()
+            
+            original.draw(in: renderRect)
+        }
+        saveImage(name: imageNamed, image: rounded)
+        return rounded
+        
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func saveImage(name: String, image: UIImage) {
+        let imagePath = getDocumentsDirectory().appendingPathComponent(name)
+        if let pngData = image.pngData() {
+            try? pngData.write(to: imagePath)
+        }
+    }
 }

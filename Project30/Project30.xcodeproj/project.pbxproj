@@ -258,13 +258,13 @@
 					51BE9E581A2667CD00578AA0 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = B5C26XE59E;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1160;
 					};
 				};
 			};
 			buildConfigurationList = 51BE9E541A2667CD00578AA0 /* Build configuration list for PBXProject "Project30" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -476,7 +476,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackingwithswift.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -490,7 +490,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hackingwithswift.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
