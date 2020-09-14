@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		293E7099250FF8FC0077192C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E7098250FF8FC0077192C /* AppDelegate.swift */; };
 		293E709B250FF8FC0077192C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E709A250FF8FC0077192C /* SceneDelegate.swift */; };
-		293E709D250FF8FC0077192C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E709C250FF8FC0077192C /* ViewController.swift */; };
 		293E70A0250FF8FC0077192C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 293E709E250FF8FC0077192C /* Main.storyboard */; };
 		293E70A2250FF8FE0077192C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 293E70A1250FF8FE0077192C /* Assets.xcassets */; };
 		293E70A5250FF8FE0077192C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 293E70A3250FF8FE0077192C /* LaunchScreen.storyboard */; };
+		293E70B62510009B0077192C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E70B52510009B0077192C /* Card.swift */; };
+		293E70B8251000FA0077192C /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E70B7251000FA0077192C /* CardController.swift */; };
+		293E70BB251006900077192C /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E70BA251006900077192C /* CardCollectionViewCell.swift */; };
+		293E70BD2510326E0077192C /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E70BC2510326E0077192C /* CardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		293E7095250FF8FC0077192C /* MilestoneProject28-30.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MilestoneProject28-30.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		293E7098250FF8FC0077192C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		293E709A250FF8FC0077192C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		293E709C250FF8FC0077192C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		293E709F250FF8FC0077192C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		293E70A1250FF8FE0077192C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		293E70A4250FF8FE0077192C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		293E70A6250FF8FE0077192C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		293E70B52510009B0077192C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		293E70B7251000FA0077192C /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
+		293E70BA251006900077192C /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		293E70BC2510326E0077192C /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,74 @@
 		293E7097250FF8FC0077192C /* MilestoneProject28-30 */ = {
 			isa = PBXGroup;
 			children = (
-				293E7098250FF8FC0077192C /* AppDelegate.swift */,
-				293E709A250FF8FC0077192C /* SceneDelegate.swift */,
-				293E709C250FF8FC0077192C /* ViewController.swift */,
-				293E709E250FF8FC0077192C /* Main.storyboard */,
-				293E70A1250FF8FE0077192C /* Assets.xcassets */,
-				293E70A3250FF8FE0077192C /* LaunchScreen.storyboard */,
-				293E70A6250FF8FE0077192C /* Info.plist */,
+				293E70B9251006830077192C /* Views */,
+				293E70B32510008D0077192C /* Model */,
+				293E70AE250FFEC90077192C /* Controllers */,
+				293E70AC250FFC9D0077192C /* Resources */,
+				293E70AD250FFCB60077192C /* Storyboards */,
 			);
 			path = "MilestoneProject28-30";
+			sourceTree = "<group>";
+		};
+		293E70AC250FFC9D0077192C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				293E7098250FF8FC0077192C /* AppDelegate.swift */,
+				293E709A250FF8FC0077192C /* SceneDelegate.swift */,
+				293E70A1250FF8FE0077192C /* Assets.xcassets */,
+				293E70A6250FF8FE0077192C /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		293E70AD250FFCB60077192C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				293E709E250FF8FC0077192C /* Main.storyboard */,
+				293E70A3250FF8FE0077192C /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		293E70AE250FFEC90077192C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				293E70B0250FFED10077192C /* ViewController */,
+				293E70AF250FFECC0077192C /* ModelController */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		293E70AF250FFECC0077192C /* ModelController */ = {
+			isa = PBXGroup;
+			children = (
+				293E70B7251000FA0077192C /* CardController.swift */,
+			);
+			path = ModelController;
+			sourceTree = "<group>";
+		};
+		293E70B0250FFED10077192C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				293E70BC2510326E0077192C /* CardViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		293E70B32510008D0077192C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				293E70B52510009B0077192C /* Card.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		293E70B9251006830077192C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				293E70BA251006900077192C /* CardCollectionViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +203,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				293E709D250FF8FC0077192C /* ViewController.swift in Sources */,
+				293E70B8251000FA0077192C /* CardController.swift in Sources */,
+				293E70BD2510326E0077192C /* CardViewController.swift in Sources */,
 				293E7099250FF8FC0077192C /* AppDelegate.swift in Sources */,
 				293E709B250FF8FC0077192C /* SceneDelegate.swift in Sources */,
+				293E70BB251006900077192C /* CardCollectionViewCell.swift in Sources */,
+				293E70B62510009B0077192C /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +353,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "MilestoneProject28-30/Info.plist";
+				INFOPLIST_FILE = "MilestoneProject28-30/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -293,7 +361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.leonardo.MilestoneProject28-30";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -302,7 +370,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "MilestoneProject28-30/Info.plist";
+				INFOPLIST_FILE = "MilestoneProject28-30/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +378,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.leonardo.MilestoneProject28-30";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
